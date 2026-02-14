@@ -5,6 +5,14 @@ body {
   background-color: #FFFFFF;
 }
 
+.App-header{
+  background-color: #3A9AFF;
+  padding: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 5);
+  text-align: center;
+}
+
 .App-main {
   display: flex;
   flex-wrap: wrap;

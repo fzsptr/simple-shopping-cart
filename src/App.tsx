@@ -7,6 +7,7 @@ import RanselImage from "./assets/Bag.jpeg"
 import HoodieImage from "./assets/Hoodie.jpeg"
 import TShirtImage from "./assets/T-Shirt.jpeg"
 import ShoesImage from "./assets/Shoes.jpeg"
+import SearchComponent from "./components/SearchComponent";
 
 function App() {
   const [courses, setCourses] = useState([
@@ -75,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-
+        <SearchComponent searchCourse={searchCourse} courseSearchUserFunction={courseSearchUserFunction}/>
       <main className="App-main">
         
       </main>
