@@ -8,38 +8,27 @@ import HoodieImage from "./assets/Hoodie.jpeg"
 import TShirtImage from "./assets/T-Shirt.jpeg"
 import ShoesImage from "./assets/Shoes.jpeg"
 import SearchComponent from "./components/SearchComponent";
+import ShowCourseComponent from "./components/ShowCourseComponent";
 
 function App() {
   const [courses, setCourses] = useState([
     {
       id: 1,
       name: "T-Shirt",
-      price: 499,
+      price: 150,
       image: TShirtImage,
     },
     {
       id: 2,
       name: "Ransel",
-      price: 699,
+      price: 856,
       image: RanselImage,
     },
     {
       id: 3,
       name: "Hoodie",
-      price: 799,
+      price: 750,
       image: HoodieImage,
-    },
-    {
-      id: 4,
-      name: "Baggy Jeans",
-      price: 399,
-      image: PantsImage
-    },
-    {
-      id: 5,
-      name: "Adidas",
-      price: 999,
-      image: ShoesImage
     }
   ]);
 
@@ -78,7 +67,10 @@ function App() {
     <div className="App">
         <SearchComponent searchCourse={searchCourse} courseSearchUserFunction={courseSearchUserFunction}/>
       <main className="App-main">
-        
+        <ShowCourseComponent
+          courses={courses}
+          filterCourseFunction={filterCourseFunction}
+          addCourseToCartFunction={addCourseToCartFunction}/>
       </main>
     </div>
   )
