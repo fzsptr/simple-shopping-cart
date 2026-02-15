@@ -1,7 +1,7 @@
 import React from 'react'
-import type { ShowCourseComponentProps } from '../types/show-course-component'
+import type { ShowCourseComponentProps } from '../types/show-course'
 
-function ShowCourseComponent({ courses, filterCourseFunction, addCourseToCartFunction } : ShowCourseComponentProps) {
+function ShowCourseComponent({ filterCourseFunction, addCourseToCartFunction } : ShowCourseComponentProps) {
   return (
     <div className='product-list'>
         {filterCourseFunction.length === 0 ? (
