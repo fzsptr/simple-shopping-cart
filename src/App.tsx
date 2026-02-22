@@ -1,14 +1,13 @@
 import { useState } from "react";
 import "./App.css";
 import type { CartItem } from "./types/cart";
-import type { Course } from "./types/course";
-import PantsImage from "./assets/Pants.jpeg"
 import RanselImage from "./assets/Bag.jpeg"
 import HoodieImage from "./assets/Hoodie.jpeg"
 import TShirtImage from "./assets/T-Shirt.jpeg"
-import ShoesImage from "./assets/Shoes.jpeg"
 import SearchComponent from "./components/SearchComponent";
 import ShowCourseComponent from "./components/ShowCourseComponent";
+import UserCartComponent from "./components/UserCartComponent";
+import type { Course } from "./types/course";
 
 function App() {
   const [courses, setCourses] = useState([
@@ -41,17 +40,25 @@ function App() {
     if(alreadyCourses) {
       const latestCartUpdate = cartCourses.map(item => 
         item.product.id === course.id ? {...item, quantity: item.quantity + 1} : item)
+      setCartCourses(latestCartUpdate)
     } else {
       setCartCourses([...cartCourses, {product: course, quantity: 1}])
     }
   };
 
-  const deleteCourseFromCartFunction = (course: Course) => {
-    const updatedCart = cartCourses.filter(item => item.product.id !== course.id)
-    setCartCourses(updatedCart)
+  const decreaseToCartFunction =  (course: Course) => {
+    setCartCourses((prevCartCourses) =>
+      prevCartCourses.map((item) => item.product.id === course.id ? {...item, quantity: item.quantity - 1} : item)
+      .filter((item) => item.quantity > 0))
   }
 
-  const totalAmountCalculationFunction = () => {
+  const deleteCourseFromCartFunction = (course: Course) => {
+    setCartCourses((prevCartCourses) => 
+      prevCartCourses.filter((item) => item.product.id !== course.id)
+    )
+  }
+
+  const totalAmountCalculationFunction = () : number => {
     return cartCourses.reduce((total, item) => total + item.product.price * item.quantity, 0) 
   }
 
@@ -70,7 +77,16 @@ function App() {
         <ShowCourseComponent
           courses={courses}
           filterCourseFunction={filterCourseFunction}
-          addCourseToCartFunction={addCourseToCartFunction}/>
+          addCourseToCartFunction={addCourseToCartFunction}
+        />
+        
+        <UserCartComponent
+          cartCourses={cartCourses}
+          onIncrease={addCourseToCartFunction}
+          onDecrease={decreaseToCartFunction}
+          onRemove={deleteCourseFromCartFunction}
+          totalAmount={totalAmountCalculationFunction()}
+        />
       </main>
     </div>
   )
